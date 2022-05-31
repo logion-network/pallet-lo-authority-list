@@ -1,6 +1,7 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
-use frame_support::traits::{EnsureOrigin, Vec};
+use frame_support::dispatch::Vec;
+use frame_support::traits::EnsureOrigin;
 use frame_system::ensure_signed;
 use logion_shared::IsLegalOfficer;
 pub use pallet::*;
@@ -65,12 +66,11 @@ pub mod pallet {
 
 	#[pallet::event]
 	#[pallet::generate_deposit(pub(super) fn deposit_event)]
-	#[pallet::metadata(<T as frame_system::Config>::AccountId = "AccountId")]
 	pub enum Event<T: Config> {
 		/// Issued when an LO is added to the list. [accountId]
-		LoAdded(<T as frame_system::Config>::AccountId),
+		LoAdded(T::AccountId),
 		/// Issued when an LO is removed from the list. [accountId]
-		LoRemoved(<T as frame_system::Config>::AccountId),
+		LoRemoved(T::AccountId),
 	}
 
 	#[pallet::error]
