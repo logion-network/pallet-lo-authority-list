@@ -6,7 +6,6 @@ use frame_support::traits::EnsureOrigin;
 use frame_system::ensure_signed;
 use logion_shared::IsLegalOfficer;
 use scale_info::TypeInfo;
-use serde::{Serialize, Deserialize};
 use sp_core::OpaquePeerId as PeerId;
 use sp_std::collections::btree_set::BTreeSet;
 
@@ -23,7 +22,8 @@ mod tests;
 #[cfg(feature = "runtime-benchmarks")]
 use frame_system::RawOrigin;
 
-#[derive(Encode, Decode, Clone, PartialEq, Eq, Debug, TypeInfo, Serialize, Deserialize)]
+#[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
+#[derive(Encode, Decode, Clone, PartialEq, Eq, Debug, TypeInfo)]
 pub struct LegalOfficerData {
 	node_id: Option<PeerId>,
 	base_url: Option<Vec<u8>>,
