@@ -77,6 +77,7 @@ impl EnsureOrigin<Origin> for EnsureManagerOriginMock {
 impl pallet_lo_authority_list::Config for Test {
 	type AddOrigin = EnsureManagerOriginMock;
 	type RemoveOrigin = EnsureManagerOriginMock;
+	type UpdateOrigin = EnsureManagerOriginMock;
 	type Event = Event;
 }
 
