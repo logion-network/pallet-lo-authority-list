@@ -1,12 +1,12 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
-use frame_support::{Serialize, Deserialize};
 use frame_support::codec::{Decode, Encode};
 use frame_support::dispatch::Vec;
 use frame_support::traits::EnsureOrigin;
 use frame_system::ensure_signed;
 use logion_shared::IsLegalOfficer;
 use scale_info::TypeInfo;
+use serde::{Serialize, Deserialize};
 use sp_core::OpaquePeerId as PeerId;
 use sp_std::collections::btree_set::BTreeSet;
 
