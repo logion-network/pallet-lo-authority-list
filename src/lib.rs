@@ -25,8 +25,8 @@ use frame_system::RawOrigin;
 #[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
 #[derive(Encode, Decode, Clone, PartialEq, Eq, Debug, TypeInfo)]
 pub struct LegalOfficerData {
-	node_id: Option<PeerId>,
-	base_url: Option<Vec<u8>>,
+	pub node_id: Option<PeerId>,
+	pub base_url: Option<Vec<u8>>,
 }
 
 impl Default for LegalOfficerData {
