@@ -186,8 +186,8 @@ pub mod pallet {
 			legal_officer_id: T::AccountId,
 			data: LegalOfficerData,
 		) -> DispatchResultWithPostInfo {
-			let who = ensure_signed(origin.clone())?;
-			if who != legal_officer_id {
+			let who = ensure_signed_or_root(origin.clone())?;
+			if who.is_some() && who.unwrap() != legal_officer_id {
 				T::UpdateOrigin::ensure_origin(origin)?;
 			}
 			if ! <LegalOfficerSet<T>>::contains_key(&legal_officer_id) {
