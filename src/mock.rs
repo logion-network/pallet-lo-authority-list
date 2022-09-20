@@ -1,11 +1,10 @@
 use crate as pallet_lo_authority_list;
 use sp_core::hash::H256;
-use frame_support::{parameter_types, traits::EnsureOrigin};
+use frame_support::parameter_types;
 use sp_runtime::{
 	traits::{BlakeTwo256, IdentityLookup}, testing::Header,
 };
-use frame_system as system;
-use system::ensure_signed;
+use frame_system::{self as system, EnsureRoot};
 
 type UncheckedExtrinsic = frame_system::mocking::MockUncheckedExtrinsic<Test>;
 type Block = frame_system::mocking::MockBlock<Test>;
@@ -53,31 +52,10 @@ impl system::Config for Test {
 	type MaxConsumers = frame_support::traits::ConstU32<16>;
 }
 
-pub const MANAGER: u64 = 1;
-
-pub struct EnsureManagerOriginMock;
-impl EnsureOrigin<Origin> for EnsureManagerOriginMock {
-    type Success = ();
-
-    fn try_origin(o: Origin) -> std::result::Result<Self::Success, Origin> {
-		let result = ensure_signed(o.clone());
-        match result {
-			Ok(who) => {
-				if who == MANAGER {
-					Ok(())
-				} else {
-					Err(o)
-				}
-			},
-			Err(_) => Err(o)
-		}
-    }
-}
-
 impl pallet_lo_authority_list::Config for Test {
-	type AddOrigin = EnsureManagerOriginMock;
-	type RemoveOrigin = EnsureManagerOriginMock;
-	type UpdateOrigin = EnsureManagerOriginMock;
+	type AddOrigin = EnsureRoot<u64>;
+	type RemoveOrigin = EnsureRoot<u64>;
+	type UpdateOrigin = EnsureRoot<u64>;
 	type Event = Event;
 }
 
