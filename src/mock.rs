@@ -30,8 +30,8 @@ impl system::Config for Test {
 	type BlockWeights = ();
 	type BlockLength = ();
 	type DbWeight = ();
-	type Origin = Origin;
-	type Call = Call;
+	type RuntimeOrigin = RuntimeOrigin;
+	type RuntimeCall = RuntimeCall;
 	type Index = u64;
 	type BlockNumber = u64;
 	type Hash = H256;
@@ -39,7 +39,7 @@ impl system::Config for Test {
 	type AccountId = u64;
 	type Lookup = IdentityLookup<Self::AccountId>;
 	type Header = Header;
-	type Event = Event;
+	type RuntimeEvent = RuntimeEvent;
 	type BlockHashCount = BlockHashCount;
 	type Version = ();
 	type PalletInfo = PalletInfo;
@@ -56,7 +56,7 @@ impl pallet_lo_authority_list::Config for Test {
 	type AddOrigin = EnsureRoot<u64>;
 	type RemoveOrigin = EnsureRoot<u64>;
 	type UpdateOrigin = EnsureRoot<u64>;
-	type Event = Event;
+	type RuntimeEvent = RuntimeEvent;
 }
 
 // Build genesis storage according to the mock runtime.

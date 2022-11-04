@@ -52,16 +52,16 @@ pub mod pallet {
 	pub trait Config: frame_system::Config {
 
 		/// The origin which can add a Logion Legal Officer.
-		type AddOrigin: EnsureOrigin<Self::Origin>;
+		type AddOrigin: EnsureOrigin<Self::RuntimeOrigin>;
 
 		/// The origin which can remove a Logion Legal Officer.
-		type RemoveOrigin: EnsureOrigin<Self::Origin>;
+		type RemoveOrigin: EnsureOrigin<Self::RuntimeOrigin>;
 
 		/// The origin which can update a Logion Legal Officer's data (in addition to himself).
-		type UpdateOrigin: EnsureOrigin<Self::Origin>;
+		type UpdateOrigin: EnsureOrigin<Self::RuntimeOrigin>;
 
 		/// The overarching event type.
-		type Event: From<Event<Self>> + IsType<<Self as frame_system::Config>::Event>;
+		type RuntimeEvent: From<Event<Self>> + IsType<<Self as frame_system::Config>::RuntimeEvent>;
 	}
 
 	#[pallet::pallet]
@@ -203,7 +203,7 @@ pub mod pallet {
 	}
 }
 
-pub type OuterOrigin<T> = <T as frame_system::Config>::Origin;
+pub type OuterOrigin<T> = <T as frame_system::Config>::RuntimeOrigin;
 
 impl<T: Config> EnsureOrigin<OuterOrigin<T>> for Pallet<T> {
 	type Success = T::AccountId;
